@@ -11,12 +11,14 @@ public class MemberDTO {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     @Builder
     public static class Request {
+        private Long memberId;
         private String email;
         private String password;
         private String userName;
 
         public Member toEntity() {
             Member member = Member.builder()
+                    .memberId(memberId)
                     .email(email)
                     .password(password)
                     .userName(userName)
@@ -40,6 +42,4 @@ public class MemberDTO {
             this.userName = member.getUserName();
         }
     }
-
-
 }

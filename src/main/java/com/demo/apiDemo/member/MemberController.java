@@ -19,21 +19,50 @@ public class MemberController {
         return "join";
     }
 
+    /**
+     * 사용자 저장
+     * @param memberDTO
+     * @return
+     * MemberDTO.Request parameter 로 사용자를 저장한다.
+     *
+     * private Long memberId;
+     * private String email;
+     * private String password;
+     * private String userName;
+     *
+     */
     @PostMapping(value = "/join")
     public Member join(@RequestBody MemberDTO.Request memberDTO) {
         return memberService.join(memberDTO);
     }
 
+    /**
+     * 사용자 조회 (PK)
+     * @param memberDTO
+     * @return
+     * memberId PK로 사용자를 조회한다.
+     */
     @GetMapping(value = "/find_by_member_id")
-    public MemberDTO.Response findByMemberId(@RequestParam("member_id") Long memberId) {
-        return memberService.findByMemberId(memberId);
+    public MemberDTO.Response findByMemberId(@RequestBody MemberDTO.Response memberDTO) {
+        return memberService.findByMemberId(memberDTO.getMemberId());
     }
 
+    /**
+     * 사용자 조회 (email)
+     * @param memberDTO
+     * @return
+     * email parameter 로 사용자를 조회한다.
+     */
     @GetMapping(value = "/find_by_email")
-    public MemberDTO.Response findByEmail(@RequestParam("email") String email) {
-        return memberService.findByEmail(email);
+    public MemberDTO.Response findByEmail(@RequestBody MemberDTO.Response memberDTO) {
+        return memberService.findByEmail(memberDTO.getEmail());
     }
 
+    /**
+     * 전체 사용자 조회
+     * @return
+     * 모든 사용자를 조회한다.
+     */
     @GetMapping(value = "/find_all_member")
     public List<MemberDTO.Response> findAllMember() {
         return memberService.findAllMember();

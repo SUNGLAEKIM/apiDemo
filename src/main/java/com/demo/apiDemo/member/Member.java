@@ -9,10 +9,7 @@ import javax.persistence.Id;
 
 @Entity
 @Getter
-//@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-//@Builder(builderMethodName = "MemberBuilder")
-
 public class Member {
 
     @Id
@@ -23,7 +20,8 @@ public class Member {
     private String userName;
 
     @Builder
-    public Member(String email, String password, String userName) {
+    public Member(Long memberId, String email, String password, String userName) {
+        this.memberId = memberId;
         this.email = email;
         this.password = password;
         this.userName = userName;
