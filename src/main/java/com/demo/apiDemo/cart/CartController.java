@@ -2,8 +2,6 @@ package com.demo.apiDemo.cart;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(value = "/api/cart")
 public class CartController {
@@ -65,13 +63,14 @@ public class CartController {
 
     /**
      * 사용자 장바구니(디테일) 조회
-     * @param cartListDTO
+     * @param cartDTO
      * @return
-     * cartId 를 FK로 가지는 모든 장바구니 상세를 조회한다.
+     * cartId 를 FK로 가지는 장바구니 상세를 조회한다.
+     * 장바구니 리스트 및 리스트의 상품 정보도 동시에 가져온다.
      */
     @GetMapping(value = "/find_all_by_cart_id")
-    public List<CartListDTO.Response> findAllByCartId(@RequestBody CartListDTO.Response cartListDTO) {
-        return cartService.findAllByCartId(cartListDTO.getCartId());
+    public CartDTO.Response findAllByCartId(@RequestBody CartDTO.Response cartDTO) {
+        return cartService.findAllByCartId(cartDTO.getCartId());
     }
 
     /**

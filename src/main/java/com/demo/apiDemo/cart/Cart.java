@@ -6,11 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -25,6 +24,9 @@ public class Cart {
     private Long totalPrice;
     @CreationTimestamp
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "cart", fetch = FetchType.EAGER)
+    private Set<CartList> cartLists = new LinkedHashSet<>();
 
     @Builder
     public Cart(Long cartId, Long memberId, Long totalQuantity, Long totalPrice) {

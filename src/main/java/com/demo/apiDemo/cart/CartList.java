@@ -1,11 +1,11 @@
 package com.demo.apiDemo.cart;
 
+import com.demo.apiDemo.product.Product;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -15,16 +15,23 @@ public class CartList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartListId;
-    private Long cartId;
-    private Long productId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cart_id")
+    @JsonIgnore
+    private Cart cart;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    @JsonManagedReference
+    private Product product;
     private Long quantity;
     private Long price;
 
     @Builder
-    public CartList(Long cartListId, Long cartId, Long productId, Long quantity, Long price) {
+    public CartList(Long cartListId, Cart cart, Product product, Long quantity, Long price) {
         this.cartListId = cartListId;
-        this.cartId = cartId;
-        this.productId = productId;
+        this.cart = cart;
+        this.product = product;
         this.quantity = quantity;
         this.price = price;
     }

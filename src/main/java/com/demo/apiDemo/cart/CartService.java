@@ -3,8 +3,6 @@ package com.demo.apiDemo.cart;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @Transactional
@@ -30,16 +28,32 @@ public class CartService {
         return new CartDTO.Response(cartRepository.findByMemberId(memberId).get());
     }
 
-    public List<CartListDTO.Response> findAllByCartId(Long cartId) {
-        List<CartList> cartLists = cartListRepository.findAllByCartId(cartId);
-        List<CartListDTO.Response> cartListDTOS = new ArrayList<>();
+//    public List<CartListDTO.Response> findAllByCartId(Long cartId) {
+//        List<CartList> cartLists = cartListRepository.findAllByCartId(cartId);
+//        List<CartListDTO.Response> cartListDTOS = new ArrayList<>();
+//
+//        for(CartList cartList : cartLists) {
+//            CartListDTO.Response response = new CartListDTO.Response(cartList);
+//            cartListDTOS.add(response);
+//        }
+//
+//        return cartListDTOS;
+//    }
 
-        for(CartList cartList : cartLists) {
-            CartListDTO.Response response = new CartListDTO.Response(cartList);
-            cartListDTOS.add(response);
-        }
+//    public List<CartListDTO.Response> findAllByCartId() {
+//        List<CartList> cartLists = cartListRepository.findAllByCartId();
+//        List<CartListDTO.Response> cartListDTOS = new ArrayList<>();
+//
+//        for(CartList cartList : cartLists) {
+//            CartListDTO.Response response = new CartListDTO.Response(cartList);
+//            cartListDTOS.add(response);
+//        }
+//
+//        return cartListDTOS;
+//    }
 
-        return cartListDTOS;
+    public CartDTO.Response findAllByCartId(Long cartId) {
+        return new CartDTO.Response(cartRepository.findAllByCartId(cartId).get());
     }
 
     public void deleteByCartId(Long cartId) {

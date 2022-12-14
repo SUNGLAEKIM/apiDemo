@@ -3,6 +3,7 @@ package com.demo.apiDemo.cart;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -38,6 +39,7 @@ public class CartDTO {
         private Long totalQuantity;
         private Long totalPrice;
         private LocalDateTime createdAt;
+        private Set<CartList> cartLists;
 
         public Response(Cart cart) {
             this.cartId = cart.getCartId();
@@ -45,6 +47,7 @@ public class CartDTO {
             this.totalQuantity = cart.getTotalQuantity();
             this.totalPrice = cart.getTotalPrice();
             this.createdAt = cart.getCreatedAt();
+            this.cartLists = cart.getCartLists();
         }
     }
 }

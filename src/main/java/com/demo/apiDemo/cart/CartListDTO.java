@@ -1,5 +1,6 @@
 package com.demo.apiDemo.cart;
 
+import com.demo.apiDemo.product.Product;
 import lombok.*;
 
 @Data
@@ -12,16 +13,16 @@ public class CartListDTO {
     @Builder
     public static class Request {
         private Long cartListId;
-        private Long cartId;
-        private Long productId;
+        private Cart cart;
+        private Product product;
         private Long quantity;
         private Long price;
 
         public CartList toEntity() {
             CartList cartList = CartList.builder()
                     .cartListId(cartListId)
-                    .cartId(cartId)
-                    .productId(productId)
+                    .cart(cart)
+                    .product(product)
                     .quantity(quantity)
                     .price(price)
                     .build();
@@ -33,15 +34,15 @@ public class CartListDTO {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class Response {
         private Long cartListId;
-        private Long cartId;
-        private Long productId;
+        private Cart cart;
+        private Product product;
         private Long quantity;
         private Long price;
 
         public Response(CartList cartList) {
             this.cartListId = cartList.getCartListId();
-            this.cartId = cartList.getCartId();
-            this.productId = cartList.getProductId();
+            this.cart = cartList.getCart();
+            this.product = cartList.getProduct();
             this.quantity = cartList.getQuantity();
             this.price = cartList.getPrice();
         }

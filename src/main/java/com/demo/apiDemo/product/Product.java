@@ -1,11 +1,10 @@
 package com.demo.apiDemo.product;
 
+import com.demo.apiDemo.cart.CartList;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -18,5 +17,8 @@ public class Product {
     private String productName;
     private int price;
     private String description;
+    @OneToOne(mappedBy = "product", fetch = FetchType.EAGER)
+    @JsonBackReference
+    private CartList cartLists;
 
 }
